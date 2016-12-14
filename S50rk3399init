@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Start 3399 linux service/window....
+#
+/usr/lib/qt/examples/touch/pinchzoom/pinchzoom -platform linuxfb -plugin EvdevTouch:/dev/input/event0 &
