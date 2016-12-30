@@ -2,4 +2,11 @@
 #
 # Start 3399 linux service/window....
 #
-/usr/lib/qt/examples/touch/pinchzoom/pinchzoom -platform linuxfb -plugin EvdevTouch:/dev/input/event0 &
+
+#for waylan
+mkdir -p /tmp/.xdg &&  chmod 0700 /tmp/.xdg
+export XDG_RUNTIME_DIR=/tmp/.xdg
+#weston --tty=2 &
+#/usr/bin/Carmachine -platform wayland -plugin EvdevTouch:/dev/input/event0 &
+
+/usr/bin/Carmachine -platform linuxfb -plugin EvdevTouch:/dev/input/event0 &
