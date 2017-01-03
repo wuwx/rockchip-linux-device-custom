@@ -10,5 +10,9 @@ rm $BUILDROOT_TARGET_PATH/usr/lib/libEGL.so*
 rm $BUILDROOT_TARGET_PATH/usr/lib/libGLESv*
 cp -d lib/gpu/* $BUILDROOT_TARGET_PATH/usr/lib/
 
+#sd udisk..
+cp $(pwd)/lib/libfsmanage.so $BUILDROOT_TARGET_PATH/usr/lib/
+cp $(pwd)/bin/ueventmonitor $BUILDROOT_TARGET_PATH/usr/bin/
+
 cp bin/Carmachine $BUILDROOT_TARGET_PATH/usr/bin/
 cp S50rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/

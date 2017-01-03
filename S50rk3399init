@@ -3,6 +3,13 @@
 # Start 3399 linux service/window....
 #
 
+#ueventmonitor for sd/udisk..
+mkdir -p /mnt/sdcard
+ueventmonitor &
+
+# Mount debugfs
+mount -t debugfs none /sys/kernel/debug
+
 #for waylan
 mkdir -p /tmp/.xdg &&  chmod 0700 /tmp/.xdg
 export XDG_RUNTIME_DIR=/tmp/.xdg
