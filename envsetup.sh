@@ -27,7 +27,7 @@ elif [ "$version" = "" ] ;then
 fi
 
 # Export 3399 sdk root directory
-export CVR_SDK_ROOT="$(pwd)"
+export RK3399_SDK_ROOT="$(pwd)"
 
 # Set croot alias
 alias croot="cd $(pwd)"
