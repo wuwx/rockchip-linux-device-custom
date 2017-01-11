@@ -13,7 +13,7 @@ mount -t debugfs none /sys/kernel/debug
 #for waylan
 mkdir -p /tmp/.xdg &&  chmod 0700 /tmp/.xdg
 export XDG_RUNTIME_DIR=/tmp/.xdg
-#weston --tty=2 &
-#/usr/bin/Carmachine -platform wayland -plugin EvdevTouch:/dev/input/event0 &
+weston --tty=2 --idle-time=0&
+/usr/bin/Carmachine -platform wayland -plugin EvdevTouch:/dev/input/event0 &
 
-/usr/bin/Carmachine -platform linuxfb -plugin EvdevTouch:/dev/input/event0 &
+#/usr/bin/Carmachine -platform linuxfb -plugin EvdevTouch:/dev/input/event0 &
