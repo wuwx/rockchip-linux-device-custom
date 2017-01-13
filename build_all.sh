@@ -8,8 +8,24 @@ CLEAN_CMD=cleanthen
 echo "build rootfs"
 cd $BUILDROOT_PATH && make && cd ..
 
+echo "arm-linux-gcc envsetup..."
+logfile="/dev/null"
+check_cmd(){
+    "$@" >> $logfile 2>&1
+}
+check_cc(){
+  check_cmd arm-linux-gcc -v
+}
+check_cc
+if [ $? -eq 127 ];then
+  source envsetup.sh
+fi
+shopt -s expand_aliases
+alias arm-linux-gcc='arm-linux-gcc -s -O2'
+#alias arm-linux-gcc='arm-linux-gcc -g -rdynamic -O2'
+
 FILE='.rkmkdirs_first'
-find $TOP_DIR -name rk_make_first.sh | sort -r > $FILE
+find $TOP_DIR -path $TOP_DIR/buildroot -prune -o -name rk_make_first.sh -print | sort -r > $FILE
 while read line;do
         #echo "Line # $k: $line"
         mk_path=$(echo $line | sed -r 's@^(/.*/)[^/]+/?@\1@g')
@@ -22,7 +38,7 @@ done < $FILE
 rm .rkmkdirs_first
 
 FILE='.rkmkdirs'
-find $TOP_DIR -name rk_make.sh | sort -r > $FILE
+find $TOP_DIR -path $TOP_DIR/buildroot -prune -o -name rk_make.sh -print | sort -r > $FILE
 while read line;do
         #echo "Line # $k: $line"
 	mk_path=$(echo $line | sed -r 's@^(/.*/)[^/]+/?@\1@g')
