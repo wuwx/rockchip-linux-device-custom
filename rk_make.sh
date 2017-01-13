@@ -28,3 +28,10 @@ cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
 mkdir -p $BUILDROOT_TARGET_PATH/system/etc
 cp -rf firmware $BUILDROOT_TARGET_PATH/system/etc/
 cp -rf etc/dnsmasq.conf $BUILDROOT_TARGET_PATH/etc/
+
+#libs for vpudec plugin,mpp decoder
+cp bin/mpp_test/* $BUILDROOT_TARGET_PATH/usr/bin/
+cp lib/mpp/* $BUILDROOT_TARGET_PATH/usr/lib/
+cp lib/gst-rk/librockchip_mpp.so* $BUILDROOT_TARGET_PATH/usr/lib
+cp lib/gst-rk/librockchip_vpu.so* $BUILDROOT_TARGET_PATH/usr/lib
+cp lib/gst-rk/libgstvpudec.so $BUILDROOT_TARGET_PATH/usr/lib/gstreamer-1.0/
