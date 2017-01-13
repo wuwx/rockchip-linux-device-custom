@@ -3,10 +3,6 @@
 # Start 3399 linux service/window....
 #
 
-#ueventmonitor for sd/udisk..
-mkdir -p /mnt/sdcard
-ueventmonitor &
-
 # Mount debugfs
 mount -t debugfs none /sys/kernel/debug
 
