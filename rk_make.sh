@@ -21,3 +21,4 @@ cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
 #wifi firmware
 mkdir -p $BUILDROOT_TARGET_PATH/system/etc
 cp -rf firmware $BUILDROOT_TARGET_PATH/system/etc/
+cp -rf etc/dnsmasq.conf $BUILDROOT_TARGET_PATH/etc/
