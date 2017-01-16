@@ -35,3 +35,4 @@ cp lib/mpp/* $BUILDROOT_TARGET_PATH/usr/lib/
 cp lib/gst-rk/librockchip_mpp.so* $BUILDROOT_TARGET_PATH/usr/lib
 cp lib/gst-rk/librockchip_vpu.so* $BUILDROOT_TARGET_PATH/usr/lib
 cp lib/gst-rk/libgstvpudec.so $BUILDROOT_TARGET_PATH/usr/lib/gstreamer-1.0/
+cp lib/gst-rk/libgstrkvideo.so $BUILDROOT_TARGET_PATH/usr/lib/gstreamer-1.0/
