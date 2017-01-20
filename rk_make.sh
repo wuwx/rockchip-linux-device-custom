@@ -20,7 +20,6 @@ cp $(pwd)/etc/umount-udisk.sh $BUILDROOT_TARGET_PATH/etc/
 cp $(pwd)/etc/udev/rules.d/add-sdcard-udisk.rules  $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
 cp $(pwd)/etc/udev/rules.d/remove-sdcard-udisk.rules  $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
 
-cp bin/Carmachine $BUILDROOT_TARGET_PATH/usr/bin/
 cp S50rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/
 cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
 
