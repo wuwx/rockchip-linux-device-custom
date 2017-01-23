@@ -20,6 +20,13 @@ cp $(pwd)/etc/umount-udisk.sh $BUILDROOT_TARGET_PATH/etc/
 cp $(pwd)/etc/udev/rules.d/add-sdcard-udisk.rules  $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
 cp $(pwd)/etc/udev/rules.d/remove-sdcard-udisk.rules  $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
 
+#adb
+cp $(pwd)/adb/adbd $BUILDROOT_TARGET_PATH/usr/bin/
+cp $(pwd)/adb/adb_config $BUILDROOT_TARGET_PATH/usr/bin/
+cp $(pwd)/adb/S30adbd $BUILDROOT_TARGET_PATH/etc/init.d/
+cp $(pwd)/adb/adb-udev.rules $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
+cp $(pwd)/adb/libcutils.so $BUILDROOT_TARGET_PATH/usr/lib/
+
 cp S50rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/
 cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
 
