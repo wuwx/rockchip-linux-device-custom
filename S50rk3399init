@@ -3,6 +3,9 @@
 # Start 3399 linux service/window....
 #
 
+#Resize root filesystem to fit available disk space
+resize2fs /dev/mmcblk1p6
+
 # Mount debugfs
 mount -t debugfs none /sys/kernel/debug
 
