@@ -5,6 +5,7 @@ KERNEL_PATH=$(pwd)/kernel
 UBOOT_PATH=$(pwd)/u-boot
 
 #cd buildroot && make && cd -
+rm -rf $IMAGE_OUT_PATH
 mkdir -p $IMAGE_OUT_PATH
 echo "Package rootfs.img now"
 source $(pwd)/device/rockchip/rk3399/mkrootfs.sh
