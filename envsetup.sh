@@ -11,7 +11,7 @@
 
 # Setup toolchain
 toolschain_path=$(pwd)/buildroot/output/host/
-version=$(arm-linux-gcc --version >/dev/null)
+version=$(arm-linux-gcc --version 2>/dev/null)
 result=$(echo $version | grep -Eo '*Buildroot 2016.08.1*')
 if [ ! "$version" = "" ] && [ "$result" = "" ] ;then
 	export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$toolschain_path/usr/bin:$PATH"
