@@ -11,17 +11,17 @@
 
 # Setup toolchain
 toolschain_path=$(pwd)/buildroot/output/host/
-version=$(arm-linux-gcc --version 2>/dev/null)
+version=$(aarch64-linux-gcc --version 2>/dev/null)
 result=$(echo $version | grep -Eo '*Buildroot 2016.08.1*')
 if [ ! "$version" = "" ] && [ "$result" = "" ] ;then
 	export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$toolschain_path/usr/bin:$PATH"
-	export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$toolschain_path/usr/arm-rockchip-linux-gnueabihf/bin:$PATH"
+	export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$toolschain_path/usr/aarch64-rockchip-linux-gnu/bin:$PATH"
 	echo "Another gcc found, will be replaced by 3399-linux SDK toolchain"
 elif [ "$version" = "" ] ;then
 	export PATH="$PATH:$toolschain_path/usr/bin"
-	export PATH="$PATH:$toolschain_path/usr/arm-rockchip-linux-gnueabihf/bin"
+	export PATH="$PATH:$toolschain_path/usr/aarch64-rockchip-linux-gnu/bin"
 
-	version=$(arm-linux-gcc --version)
+	version=$(aarch64-linux-gcc --version)
 	echo "Set toolchain path to: <SdkRoot>/buildroot/output/host/usr"
 #	echo $version
 fi
