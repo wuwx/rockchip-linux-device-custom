@@ -39,7 +39,8 @@ then
         cp -a $UBOOT_PATH/*_loader_*.bin $IMAGE_OUT_PATH/MiniLoaderAll.bin
         echo "done."
 else
-	echo "$UBOOT_PATH/*MiniLoaderAll_*.bin not fount! Please make it from $UBOOT_PATH first!"
+	echo "$UBOOT_PATH/*loader_*.bin not fount,or there are multiple loaders! Please make it from $UBOOT_PATH first!"
+	rm $UBOOT_PATH/*_loader_*.bin
 	cp $(pwd)/device/rockchip/rk3399/rockimg/MiniLoaderAll.bin $IMAGE_OUT_PATH/
 fi
 
