@@ -9,6 +9,15 @@ rm -rf $IMAGE_OUT_PATH
 mkdir -p $IMAGE_OUT_PATH
 echo "Package rootfs.img now"
 source $(pwd)/device/rockchip/rk3399/mkrootfs.sh
+
+#only for github project to output rootfs
+if [ -d $(pwd)/out ]
+then
+	cp $(pwd)/buildroot/output/images/rootfs.ext4 $(pwd)/out/rootfs.img
+	echo 'Image: rootfs.img in out directory is ready'
+	exit
+fi
+
 cp $(pwd)/buildroot/output/images/rootfs.ext4 $IMAGE_OUT_PATH/rootfs.img
 
 cp $(pwd)/device/rockchip/rk3399/rockimg/parameter.txt $IMAGE_OUT_PATH/
