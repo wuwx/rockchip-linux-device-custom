@@ -13,6 +13,8 @@ mount -t debugfs none /sys/kernel/debug
 mkdir -p /tmp/.xdg &&  chmod 0700 /tmp/.xdg
 export XDG_RUNTIME_DIR=/tmp/.xdg
 weston --tty=2 --idle-time=0&
+#export QT_GSTREAMER_WINDOW_VIDEOSINK=waylandsink
+export QT_GSTREAMER_WINDOW_VIDEOSINK=kmssink
 /usr/bin/Carmachine -platform wayland -plugin EvdevTouch:/dev/input/event0 -plugin EvdevKeyboard:/dev/input/event1 -plugin EvdevKeyboard:/dev/input/event2 &
 
 #/usr/bin/Carmachine -platform linuxfb -plugin EvdevTouch:/dev/input/event0 &
