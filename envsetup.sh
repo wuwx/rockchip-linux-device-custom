@@ -31,3 +31,13 @@ export RK3399_SDK_ROOT="$(pwd)"
 
 # Set croot alias
 alias croot="cd $(pwd)"
+
+#define build err exit function
+check_err_exit(){
+  if [ $1 -ne "0" ]; then
+     echo -e $MSG_ERR
+     cd $TOP_DIR
+     exit 2
+  fi
+}
+export -f check_err_exit
