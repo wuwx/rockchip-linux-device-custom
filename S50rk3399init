@@ -9,7 +9,9 @@ resize2fs /dev/mmcblk1p5
 # Mount debugfs
 mount -t debugfs none /sys/kernel/debug
 
-#for waylan
+export LC_ALL='zh_CN.utf8'
+
+#for wayland
 mkdir -p /tmp/.xdg &&  chmod 0700 /tmp/.xdg
 export XDG_RUNTIME_DIR=/tmp/.xdg
 weston --tty=2 --idle-time=0&
