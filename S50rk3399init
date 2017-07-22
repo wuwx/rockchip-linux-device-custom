@@ -11,6 +11,9 @@ mount -t debugfs none /sys/kernel/debug
 
 export LC_ALL='zh_CN.utf8'
 
+# bluetooth
+rkbt  /etc/bluetooth/bcm4354a1.hcd /dev/ttyS0 &
+
 #for wayland
 mkdir -p /tmp/.xdg &&  chmod 0700 /tmp/.xdg
 export XDG_RUNTIME_DIR=/tmp/.xdg

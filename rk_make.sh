@@ -28,6 +28,11 @@ cp $(pwd)/usb/usb_config $BUILDROOT_TARGET_PATH/usr/bin/
 cp S50rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/
 cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
 
+mkdir -p $BUILDROOT_TARGET_PATH/etc/bluetooth/
+cp $(pwd)/bluetooth/broadcom/fw/* $BUILDROOT_TARGET_PATH/etc/bluetooth/
+cp $(pwd)/bluetooth/broadcom/brcm_patchram_plus $BUILDROOT_TARGET_PATH/usr/sbin/
+cp $(pwd)/bluetooth/broadcom/rkbt $BUILDROOT_TARGET_PATH/usr/bin/
+
 #wifi firmware
 mkdir -p $BUILDROOT_TARGET_PATH/system/etc
 cp -rf firmware $BUILDROOT_TARGET_PATH/system/etc/
