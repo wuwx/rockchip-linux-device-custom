@@ -3,25 +3,42 @@
 # Start 3399 linux service/window....
 #
 
-#Resize root filesystem to fit available disk space
-resize2fs /dev/mmcblk1p5
+case "$1" in
+	start)
+		#Resize root filesystem to fit available disk space
+		resize2fs /dev/mmcblk1p5
 
-# Mount debugfs
-mount -t debugfs none /sys/kernel/debug
+		# Mount debugfs
+		mount -t debugfs none /sys/kernel/debug
 
-export LC_ALL='zh_CN.utf8'
+		export LC_ALL='zh_CN.utf8'
 
-# bluetooth
-rkbt  /etc/bluetooth/bcm4354a1.hcd /dev/ttyS0 &
+		# bluetooth
+		rkbt  /etc/bluetooth/bcm4354a1.hcd /dev/ttyS0 &
 
-#for wayland
-mkdir -p /tmp/.xdg &&  chmod 0700 /tmp/.xdg
-export XDG_RUNTIME_DIR=/tmp/.xdg
-weston --tty=2 --idle-time=0&
-#export QT_GSTREAMER_WINDOW_VIDEOSINK=waylandsink
-export QT_GSTREAMER_WINDOW_VIDEOSINK=kmssink
-/usr/bin/Carmachine -platform wayland -plugin EvdevTouch:/dev/input/event0 -plugin EvdevKeyboard:/dev/input/event1 -plugin EvdevKeyboard:/dev/input/event2 &
+		#for wayland
+		mkdir -p /tmp/.xdg &&  chmod 0700 /tmp/.xdg
+		export XDG_RUNTIME_DIR=/tmp/.xdg
+		weston --tty=2 --idle-time=0&
+		#export QT_GSTREAMER_WINDOW_VIDEOSINK=waylandsink
+		export QT_GSTREAMER_WINDOW_VIDEOSINK=kmssink
+		/usr/bin/Carmachine -platform wayland -plugin EvdevTouch:/dev/input/event0 -plugin EvdevKeyboard:/dev/input/event1 -plugin EvdevKeyboard:/dev/input/event2 &
 
-#/usr/bin/Carmachine -platform linuxfb -plugin EvdevTouch:/dev/input/event0 &
-echo performance > /sys/class/devfreq/ff9a0000.gpu/governor
-echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+		#for qt eglfs
+		#export QT_GSTREAMER_WINDOW_VIDEOSINK=kmssink
+		#/usr/bin/Carmachine -platform eglfs -plugin EvdevTouch:/dev/input/event0 &
+
+		echo performance > /sys/class/devfreq/ff9a0000.gpu/governor
+		echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+		;;
+	stop)
+		killall CarMachine
+		killall weston
+		printf "stop finished"
+        ;;
+	*)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+        ;;
+esac
+exit 0
