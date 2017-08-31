@@ -1,6 +1,5 @@
 #! /bin/sh
 
-TOP_DIR=$(pwd)
 BUILDROOT_TARGET_PATH=$(pwd)/../../../buildroot/output/target/
 
 #gpu

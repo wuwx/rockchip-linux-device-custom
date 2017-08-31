@@ -28,8 +28,8 @@ then
         cp -a $UBOOT_PATH/uboot.img $IMAGE_OUT_PATH/uboot.img
         echo "done."
 else
-        echo "$UBOOT_PATH/uboot.img not fount! Please make it from $UBOOT_PATH first!"
-	cp $(pwd)/device/rockchip/rk3399/rockimg/uboot.img $IMAGE_OUT_PATH/
+        echo -e "\e[31m error: $UBOOT_PATH/uboot.img not fount! Please make it from $UBOOT_PATH first! \e[0m"
+	exit 0
 fi
 
 if [ -f $UBOOT_PATH/trust.img ]
@@ -38,8 +38,8 @@ then
         cp -a $UBOOT_PATH/trust.img $IMAGE_OUT_PATH/trust.img
         echo "done."
 else
-        echo "$UBOOT_PATH/trust.img not fount! Please make it from $UBOOT_PATH first!"
-	cp $(pwd)/device/rockchip/rk3399/rockimg/trust.img $IMAGE_OUT_PATH/
+        echo -e "\e[31m error: $UBOOT_PATH/trust.img not fount! Please make it from $UBOOT_PATH first! \e[0m"
+	exit 0
 fi
 
 if [ -f $UBOOT_PATH/*_loader_*.bin ]
@@ -48,9 +48,9 @@ then
         cp -a $UBOOT_PATH/*_loader_*.bin $IMAGE_OUT_PATH/MiniLoaderAll.bin
         echo "done."
 else
-	echo "$UBOOT_PATH/*loader_*.bin not fount,or there are multiple loaders! Please make it from $UBOOT_PATH first!"
+	echo -e "\e[31m error: $UBOOT_PATH/*loader_*.bin not fount,or there are multiple loaders! Please make it from $UBOOT_PATH first! \e[0m"
 	rm $UBOOT_PATH/*_loader_*.bin
-	cp $(pwd)/device/rockchip/rk3399/rockimg/MiniLoaderAll.bin $IMAGE_OUT_PATH/
+	exit 0
 fi
 
 if [ -f $KERNEL_PATH/resource.img ]
@@ -59,7 +59,8 @@ then
         cp -a $KERNEL_PATH/resource.img $IMAGE_OUT_PATH/resource.img
         echo "done."
 else
-        echo "$KERNEL_PATH/resource.img not fount!"
+        echo -e "\e[31m error: $KERNEL_PATH/resource.img not fount! \e[0m"
+	exit 0
 fi
 
 if [ -f $KERNEL_PATH/kernel.img ]
@@ -68,6 +69,7 @@ then
         cp -a $KERNEL_PATH/kernel.img $IMAGE_OUT_PATH/kernel.img
         echo "done."
 else
-        echo "$KERNEL_PATH/kernel.img not fount!"
+        echo -e "\e[31m error: $KERNEL_PATH/kernel.img not fount! \e[0m"
+	exit 0
 fi
-echo 'Image: image in rockimg is ready'
+echo -e "\e[36m Image: image in rockimg is ready \e[0m"
