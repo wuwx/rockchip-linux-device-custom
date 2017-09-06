@@ -42,4 +42,4 @@ cp bin/mpp_test/* $BUILDROOT_TARGET_PATH/usr/bin/
 cp lib/mpp/* $BUILDROOT_TARGET_PATH/usr/lib/
 
 #Character Font
-cp lib/simhei.ttf $BUILDROOT_TARGET_PATH/usr/lib/fonts/
+cp -r lib/fonts $BUILDROOT_TARGET_PATH/usr/lib/
