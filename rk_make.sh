@@ -26,7 +26,7 @@ cp $(pwd)/usb/usb_config $BUILDROOT_TARGET_PATH/usr/bin/
 
 #adb
 cp $(pwd)/adb/adbd $BUILDROOT_TARGET_PATH/usr/bin/
-cp $(pwd)/adb/libcutils.so $BUILDROOT_TARGET_PATH/usr/bin/
+cp $(pwd)/adb/libcutils.so $BUILDROOT_TARGET_PATH/usr/lib/
 
 cp S50rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/
 cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
