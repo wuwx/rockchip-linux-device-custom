@@ -2,6 +2,8 @@
 
 BUILDROOT_TARGET_PATH=$(pwd)/../../../buildroot/output/target/
 
+source package_config.sh
+
 #gpu
 rm $BUILDROOT_TARGET_PATH/usr/lib/libwayland-egl.so*
 rm $BUILDROOT_TARGET_PATH/usr/lib/libgbm.so*
@@ -9,32 +11,53 @@ rm $BUILDROOT_TARGET_PATH/usr/lib/libEGL.so*
 rm $BUILDROOT_TARGET_PATH/usr/lib/libGLESv*
 cp -d lib/gpu/* $BUILDROOT_TARGET_PATH/usr/lib/
 
+if [[ "$PLATFORM_WAYLAND"x == "no"x  ]];then
+	echo "PLATFORM_EGLFS"
+	cp lib/libmali_eglfs.so $BUILDROOT_TARGET_PATH/usr/lib/libmali.so
+else
+	echo "PLATFORM_WAYLAND"
+	cp lib/libmali_wayland.so $BUILDROOT_TARGET_PATH/usr/lib/libmali.so
+fi
+
 #sd udisk..
-mkdir -p $BUILDROOT_TARGET_PATH/mnt/sdcard/
-mkdir -p $BUILDROOT_TARGET_PATH/mnt/udisk/
-cp $(pwd)/etc/mount-sdcard.sh $BUILDROOT_TARGET_PATH/etc/
-cp $(pwd)/etc/mount-udisk.sh $BUILDROOT_TARGET_PATH/etc/
-cp $(pwd)/etc/umount-sdcard.sh $BUILDROOT_TARGET_PATH/etc/
-cp $(pwd)/etc/umount-udisk.sh $BUILDROOT_TARGET_PATH/etc/
-cp $(pwd)/etc/udev/rules.d/add-sdcard-udisk.rules  $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
-cp $(pwd)/etc/udev/rules.d/remove-sdcard-udisk.rules  $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
+if [ "$enable_sdcard_udisk"x = "yes"x ];then
+	echo "enable sdcard and udisk"
+	mkdir -p $BUILDROOT_TARGET_PATH/mnt/sdcard/
+	mkdir -p $BUILDROOT_TARGET_PATH/mnt/udisk/
+	cp $(pwd)/etc/mount-sdcard.sh $BUILDROOT_TARGET_PATH/etc/
+	cp $(pwd)/etc/mount-udisk.sh $BUILDROOT_TARGET_PATH/etc/
+	cp $(pwd)/etc/umount-sdcard.sh $BUILDROOT_TARGET_PATH/etc/
+	cp $(pwd)/etc/umount-udisk.sh $BUILDROOT_TARGET_PATH/etc/
+	cp $(pwd)/etc/udev/rules.d/add-sdcard-udisk.rules  $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
+	cp $(pwd)/etc/udev/rules.d/remove-sdcard-udisk.rules  $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
+fi
 
 #usb
-cp $(pwd)/usb/11usb.rules $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
-cp $(pwd)/usb/S60usb $BUILDROOT_TARGET_PATH/etc/init.d/
-cp $(pwd)/usb/usb_config $BUILDROOT_TARGET_PATH/usr/bin/
+if [ "$enable_usb"x = "yes"x ];then
+	echo "enable usb"
+	cp $(pwd)/usb/11usb.rules $BUILDROOT_TARGET_PATH/etc/udev/rules.d/
+	cp $(pwd)/usb/S60usb $BUILDROOT_TARGET_PATH/etc/init.d/
+	cp $(pwd)/usb/usb_config $BUILDROOT_TARGET_PATH/usr/bin/
+fi
 
 #adb
-cp $(pwd)/adb/adbd $BUILDROOT_TARGET_PATH/usr/bin/
-cp $(pwd)/adb/libcutils.so $BUILDROOT_TARGET_PATH/usr/lib/
+if [ "$enable_adb"x = "yes"x ];then
+	echo "enable adb"
+	cp $(pwd)/adb/adbd $BUILDROOT_TARGET_PATH/usr/bin/
+	cp $(pwd)/adb/libcutils.so $BUILDROOT_TARGET_PATH/usr/lib/
+fi
 
 cp S50rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/
 cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
 
-mkdir -p $BUILDROOT_TARGET_PATH/etc/bluetooth/
-cp $(pwd)/bluetooth/broadcom/fw/* $BUILDROOT_TARGET_PATH/etc/bluetooth/
-cp $(pwd)/bluetooth/broadcom/brcm_patchram_plus $BUILDROOT_TARGET_PATH/usr/sbin/
-cp $(pwd)/bluetooth/broadcom/rkbt $BUILDROOT_TARGET_PATH/usr/bin/
+#bluetooth
+if [ "$enable_bluetooth"x = "yes"x ];then
+	echo "enable bluetooth"
+	mkdir -p $BUILDROOT_TARGET_PATH/etc/bluetooth/
+	cp $(pwd)/bluetooth/broadcom/fw/* $BUILDROOT_TARGET_PATH/etc/bluetooth/
+	cp $(pwd)/bluetooth/broadcom/brcm_patchram_plus $BUILDROOT_TARGET_PATH/usr/sbin/
+	cp $(pwd)/bluetooth/broadcom/rkbt $BUILDROOT_TARGET_PATH/usr/bin/
+fi
 
 #wifi firmware
 mkdir -p $BUILDROOT_TARGET_PATH/system/etc
