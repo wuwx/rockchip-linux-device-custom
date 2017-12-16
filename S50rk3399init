@@ -27,6 +27,9 @@ case "$1" in
 		# music
 		/usr/bin/audioservice &
 
+		#Power manager
+		/usr/bin/power_manager_service &
+
 		#for QLauncher wayland
 		#mkdir -p /tmp/.xdg &&  chmod 0700 /tmp/.xdg
 		#export XDG_RUNTIME_DIR=/tmp/.xdg
