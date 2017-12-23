@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Start linux launcher...
+#
+
+case "$1" in
+  start)
+		#Power manager
+		/usr/bin/power_manager_service &
+
+		printf "Starting launcher: "
+		export LC_ALL='zh_CN.utf8'
+		export QT_QPA_EVDEV_TOUCHSCREEN_PARAMETERS=/dev/input/event0
+		export QT_QPA_EVDEV_KEYBOARD_PARAMETERS=/dev/input/event1:/dev/input/event2
+
+		#for kmssink
+		export QT_GSTREAMER_WINDOW_VIDEOSINK=kmssink
+
+		#for Carmachine eglfs
+		#/usr/bin/Carmachine -platform eglfs -plugin EvdevTouch:/dev/input/event0 &
+
+		#for QLauncher eglfs
+		/usr/local/QLauncher/QLauncher -platform EGLFS -plugin EvdevTouch -plugin EvdevKeyboard &
+	;;
+  stop)
+		#killall CarMachine
+		killall QLauncher
+		printf "stop finished"
+        ;;
+  *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+        ;;
+esac
+exit 0

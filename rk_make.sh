@@ -47,7 +47,15 @@ if [ "$enable_adb"x = "yes"x ];then
 	cp $(pwd)/adb/libcutils.so $BUILDROOT_TARGET_PATH/usr/lib/
 fi
 
-cp S50rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/
+#S12_launcher
+if [[ "$PLATFORM_WAYLAND"x == "no"x  ]];then
+	echo "PLATFORM_EGLFS"
+	cp S50_launcher_eglfs $BUILDROOT_TARGET_PATH/etc/init.d/S50_launcher
+else
+	echo "PLATFORM_WAYLAND"
+	cp S50_launcher_wayland $BUILDROOT_TARGET_PATH/etc/init.d/S50_launcher
+fi
+cp S10rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/
 cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
 
 #bluetooth
