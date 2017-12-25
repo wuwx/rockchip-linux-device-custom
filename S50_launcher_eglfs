@@ -17,7 +17,7 @@ case "$1" in
 		export QT_GSTREAMER_WINDOW_VIDEOSINK=kmssink
 
 		#for Carmachine eglfs
-		#/usr/bin/Carmachine -platform eglfs -plugin EvdevTouch:/dev/input/event0 &
+		#/usr/bin/Carmachine -platform EGLFS -plugin EvdevTouch -plugin EvdevKeyboard &
 
 		#for QLauncher eglfs
 		/usr/local/QLauncher/QLauncher -platform EGLFS -plugin EvdevTouch -plugin EvdevKeyboard &

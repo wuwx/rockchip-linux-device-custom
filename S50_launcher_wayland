@@ -24,7 +24,7 @@ case "$1" in
 		#/usr/local/QLauncher/QLauncher -platform wayland -plugin EvdevTouch -plugin EvdevKeyboard &
 
 		#for Carmachine wayland
-		/usr/bin/Carmachine -platform wayland -plugin EvdevTouch:/dev/input/event0 &
+		/usr/bin/Carmachine -platform wayland -plugin EvdevTouch -plugin EvdevKeyboard &
 
 	;;
   stop)
