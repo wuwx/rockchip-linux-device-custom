@@ -21,9 +21,16 @@ if [ "$PLATFORM_WAYLAND"x = "no"x ];then
 		done < $(pwd)/patch/kernel/$FILE
 		rm $(pwd)/patch/kernel/$FILE
 	fi
+else
+	cd $KERNEL_PATH
+	git apply --check 0001-rk3399-vop-turn-over-win0-and-win1-position.patch 1> /dev/null  2>&1
+	if [ $? -ne "0" ]; then
+		git checkout drivers/gpu/drm/rockchip/rockchip_drm_vop.c
+	fi
+	cd -
 fi
 
-cd $KERNEL_PATH
-make ARCH=arm64 rockchip_linux_defconfig
-make ARCH=arm64 rk3399-sapphire-excavator-linux.img -j12
+#cd $KERNEL_PATH
+#make ARCH=arm64 rockchip_linux_defconfig
+#make ARCH=arm64 rk3399-sapphire-excavator-linux.img -j12
 
