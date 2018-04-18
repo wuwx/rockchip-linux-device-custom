@@ -1,16 +1,25 @@
 TOOL_PATH=$(pwd)/build
-IMAGE_OUT_PATH=$(pwd)/rockimg/
+IMAGE_OUT_PATH=$(pwd)/rockimg
 IMAGE_RELEASE_PATH=$(pwd)/rockimg/Image-release
 KERNEL_PATH=$(pwd)/kernel
 UBOOT_PATH=$(pwd)/u-boot
+ROOTFS_PATH=$(pwd)/rootfs
 
-#cd buildroot && make && cd -
-rm -rf $IMAGE_OUT_PATH
-mkdir -p $IMAGE_OUT_PATH
-echo "Package rootfs.img now"
-source $(pwd)/device/rockchip/rk3399/mkrootfs.sh
-
-cp $(pwd)/buildroot/output/images/rootfs.ext4 $IMAGE_OUT_PATH/rootfs.img
+if [ $1 = buildroot ]
+then
+    #cd buildroot && make && cd -
+    rm -rf $IMAGE_OUT_PATH
+    mkdir -p $IMAGE_OUT_PATH
+    echo "Package rootfs.img now"
+    source $(pwd)/device/rockchip/rk3399/mkrootfs.sh
+    cp $(pwd)/buildroot/output/images/rootfs.ext4 $IMAGE_OUT_PATH/rootfs.img
+elif [ $1 = debian ]
+then
+    echo "Package rootfs.img now"
+    cp $ROOTFS_PATH/linaro-rootfs.img $IMAGE_OUT_PATH/rootfs.img
+else
+    echo -e "\e[31m error: please use the ./mkfirmware.sh debian or ./mkfirmware.sh buildroot \e[0m"
+fi
 
 cp $(pwd)/device/rockchip/rk3399/rockimg/parameter.txt $IMAGE_OUT_PATH/
 
