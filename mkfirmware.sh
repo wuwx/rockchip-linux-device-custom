@@ -1,10 +1,10 @@
 TOOL_PATH=$(pwd)/build
 IMAGE_OUT_PATH=$(pwd)/rockimg
-IMAGE_RELEASE_PATH=$(pwd)/rockimg/Image-release
 KERNEL_PATH=$(pwd)/kernel
 UBOOT_PATH=$(pwd)/u-boot
 ROOTFS_PATH=$(pwd)/rootfs
 
+mkdir -p $IMAGE_OUT_PATH
 if [ $1 = buildroot ]
 then
     #cd buildroot && make && cd -
