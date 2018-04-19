@@ -29,7 +29,7 @@ then
         cp -a $UBOOT_PATH/uboot.img $IMAGE_OUT_PATH/uboot.img
         echo "done."
 else
-        echo -e "\e[31m error: $UBOOT_PATH/uboot.img not fount! Please make it from $UBOOT_PATH first! \e[0m"
+        echo -e "\e[31m error: $UBOOT_PATH/uboot.img not found! Please make it from $UBOOT_PATH first! \e[0m"
 	exit 0
 fi
 
@@ -39,7 +39,7 @@ then
         cp -a $UBOOT_PATH/trust.img $IMAGE_OUT_PATH/trust.img
         echo "done."
 else
-        echo -e "\e[31m error: $UBOOT_PATH/trust.img not fount! Please make it from $UBOOT_PATH first! \e[0m"
+        echo -e "\e[31m error: $UBOOT_PATH/trust.img not found! Please make it from $UBOOT_PATH first! \e[0m"
 	exit 0
 fi
 
@@ -49,7 +49,7 @@ then
         cp -a $UBOOT_PATH/*_loader_*.bin $IMAGE_OUT_PATH/MiniLoaderAll.bin
         echo "done."
 else
-	echo -e "\e[31m error: $UBOOT_PATH/*loader_*.bin not fount,or there are multiple loaders! Please make it from $UBOOT_PATH first! \e[0m"
+	echo -e "\e[31m error: $UBOOT_PATH/*loader_*.bin not found,or there are multiple loaders! Please make it from $UBOOT_PATH first! \e[0m"
 	rm $UBOOT_PATH/*_loader_*.bin
 	exit 0
 fi
@@ -60,7 +60,7 @@ then
         cp -a $KERNEL_PATH/resource.img $IMAGE_OUT_PATH/resource.img
         echo "done."
 else
-        echo -e "\e[31m error: $KERNEL_PATH/resource.img not fount! \e[0m"
+        echo -e "\e[31m error: $KERNEL_PATH/resource.img not found! \e[0m"
 	exit 0
 fi
 
@@ -70,7 +70,7 @@ then
         cp -a $KERNEL_PATH/kernel.img $IMAGE_OUT_PATH/kernel.img
         echo "done."
 else
-        echo -e "\e[31m error: $KERNEL_PATH/kernel.img not fount! \e[0m"
+        echo -e "\e[31m error: $KERNEL_PATH/kernel.img not found! \e[0m"
 	exit 0
 fi
 echo -e "\e[36m Image: image in rockimg is ready \e[0m"
