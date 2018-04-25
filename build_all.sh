@@ -4,7 +4,7 @@ TOP_DIR=$(pwd)
 OUT_PATH=./out
 BUILDROOT_PATH=$(pwd)/buildroot/
 CLEAN_CMD=cleanthen
-PRODUCT_PATH=$(pwd)/device/rockchip/rk3399
+PRODUCT_PATH=$(pwd)/device/rockchip/rk3288
 
 #define build err exit function
 check_err_exit(){
@@ -64,7 +64,7 @@ done < $FILE
 [ -d $FILE ] && rm -rf $FILE
 
 cd $PRODUCT_PATH
-source $PRODUCT_PATH/mk-kernel.sh
+#source $PRODUCT_PATH/mk-kernel.sh
 cd $TOP_DIR
 
 echo -e "\e[36m build all Done \e[0m"
