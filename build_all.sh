@@ -64,7 +64,7 @@ done < $FILE
 [ -d $FILE ] && rm -rf $FILE
 
 cd $PRODUCT_PATH
-#source $PRODUCT_PATH/mk-kernel.sh
+source $PRODUCT_PATH/mk-kernel.sh
 cd $TOP_DIR
 
 echo -e "\e[36m build all Done \e[0m"
