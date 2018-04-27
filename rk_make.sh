@@ -44,7 +44,6 @@ fi
 if [ "$enable_adb"x = "yes"x ];then
 	echo "enable adb"
 	cp $(pwd)/adb/adbd $BUILDROOT_TARGET_PATH/usr/bin/
-	cp $(pwd)/adb/libcutils.so $BUILDROOT_TARGET_PATH/usr/lib/
 fi
 
 #S12_launcher
