@@ -73,4 +73,15 @@ else
         echo -e "\e[31m error: $KERNEL_PATH/kernel.img not found! \e[0m"
 	exit 0
 fi
+
+if [ -f $KERNEL_PATH/boot.img ]
+then
+	echo -n "create boot.img..."
+	cp -a $KERNEL_PATH/boot.img $IMAGE_OUT_PATH/boot.img
+	echo "done."
+else
+	echo -e "\e[31m error: $KERNEL_PATH/boot.img not found! \e[0m"
+	exit 0
+fi
+
 echo -e "\e[36m Image: image in rockimg is ready \e[0m"
