@@ -55,7 +55,10 @@ else
 	cp S50_launcher_wayland $BUILDROOT_TARGET_PATH/etc/init.d/S50_launcher
 fi
 cp S10rk3288init $BUILDROOT_TARGET_PATH/etc/init.d/
-cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
+
+#alsa config
+cp alsa_conf/rt5640/rt5640.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/cards/rt5640.conf
+sed -i "4arockchip_rt5640 cards.rt5640" $BUILDROOT_TARGET_PATH/usr/share/alsa/cards/aliases.conf
 
 #bluetooth
 if [ "$enable_bluetooth"x = "yes"x ];then
