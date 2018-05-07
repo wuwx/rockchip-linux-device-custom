@@ -22,6 +22,7 @@ else
 fi
 
 cp $(pwd)/device/rockchip/rk3399/rockimg/parameter.txt $IMAGE_OUT_PATH/
+cp $(pwd)/device/rockchip/rk3399/rockimg/oem.img $IMAGE_OUT_PATH/
 
 if [ -f $UBOOT_PATH/uboot.img ]
 then
