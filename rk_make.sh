@@ -24,6 +24,7 @@ if [ "$enable_sdcard_udisk"x = "yes"x ];then
 	echo "enable sdcard and udisk"
 	mkdir -p $BUILDROOT_TARGET_PATH/mnt/sdcard/
 	mkdir -p $BUILDROOT_TARGET_PATH/mnt/udisk/
+	ln -s $BUILDROOT_TARGET_PATH/sdcard $BUILDROOT_TARGET_PATH/mnt/sdcard
 	cp $(pwd)/etc/mount-sdcard.sh $BUILDROOT_TARGET_PATH/etc/
 	cp $(pwd)/etc/mount-udisk.sh $BUILDROOT_TARGET_PATH/etc/
 	cp $(pwd)/etc/umount-sdcard.sh $BUILDROOT_TARGET_PATH/etc/
@@ -78,3 +79,6 @@ cp lib/mpp/* $BUILDROOT_TARGET_PATH/usr/lib/
 
 #Character Font
 cp -r lib/fonts $BUILDROOT_TARGET_PATH/usr/lib/
+
+mkdir $BUILDROOT_TARGET_PATH/misc
+mkdir $BUILDROOT_TARGET_PATH/data
