@@ -55,26 +55,6 @@ else
 	exit 0
 fi
 
-if [ -f $KERNEL_PATH/resource.img ]
-then
-        echo -n "create resource.img..."
-        cp -a $KERNEL_PATH/resource.img $IMAGE_OUT_PATH/resource.img
-        echo "done."
-else
-        echo -e "\e[31m error: $KERNEL_PATH/resource.img not found! \e[0m"
-	exit 0
-fi
-
-if [ -f $KERNEL_PATH/kernel.img ]
-then
-        echo -n "create kernel.img..."
-        cp -a $KERNEL_PATH/kernel.img $IMAGE_OUT_PATH/kernel.img
-        echo "done."
-else
-        echo -e "\e[31m error: $KERNEL_PATH/kernel.img not found! \e[0m"
-	exit 0
-fi
-
 if [ -f $KERNEL_PATH/boot.img ]
 then
 	echo -n "create boot.img..."
