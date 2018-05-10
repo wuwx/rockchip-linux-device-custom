@@ -13,10 +13,10 @@ cp -d lib/gpu/* $BUILDROOT_TARGET_PATH/usr/lib/
 
 if [[ "$PLATFORM_WAYLAND"x == "no"x  ]];then
 	echo "PLATFORM_EGLFS"
-	cp lib/libmali_eglfs.so $BUILDROOT_TARGET_PATH/usr/lib/libmali.so
+	cp lib/libmali_eglfs*.so $BUILDROOT_TARGET_PATH/usr/lib/
 else
 	echo "PLATFORM_WAYLAND"
-	cp lib/libmali_wayland.so $BUILDROOT_TARGET_PATH/usr/lib/libmali.so
+	cp lib/libmali_wayland*.so $BUILDROOT_TARGET_PATH/usr/lib/
 fi
 
 #sd udisk..
