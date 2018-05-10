@@ -48,6 +48,9 @@ if [ "$enable_adb"x = "yes"x ];then
 	cp $(pwd)/adb/libcutils.so $BUILDROOT_TARGET_PATH/usr/lib/
 fi
 
+#dp firmware
+cp lib/firmware/rockchip/dptx.bin $BUILDROOT_TARGET_PATH/lib/firmware/rockchip/
+
 #S12_launcher
 if [[ "$PLATFORM_WAYLAND"x == "no"x  ]];then
 	echo "PLATFORM_EGLFS"
