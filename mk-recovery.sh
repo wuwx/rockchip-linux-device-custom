@@ -139,6 +139,9 @@ echo -n "copy init for recovery..."
 sudo cp -a $DEVICE_DIR/recovery.init $RAMDISK_DIR/init
 sudo chown root:root $RAMDISK_DIR/init
 sudo chmod 755 $RAMDISK_DIR/init
+sudo cp -a $DEVICE_DIR/S50_recovery $RAMDISK_DIR/etc/init.d
+sudo chown root:root $RAMDISK_DIR/etc/init.d
+sudo chmod 755 $RAMDISK_DIR/etc/init.d
 echo "done."
 
 echo -n "modify fstab..."
