@@ -60,6 +60,7 @@ else
 	cp S50_launcher_wayland $BUILDROOT_TARGET_PATH/etc/init.d/S50_launcher
 fi
 cp S10rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/
+cp S10ueventd $BUILDROOT_TARGET_PATH/etc/init.d/
 cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
 
 #bluetooth
