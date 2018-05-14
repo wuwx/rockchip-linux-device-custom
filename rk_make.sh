@@ -61,6 +61,7 @@ else
 fi
 cp S10rk3399init $BUILDROOT_TARGET_PATH/etc/init.d/
 cp S10ueventd $BUILDROOT_TARGET_PATH/etc/init.d/
+cp S70mount $BUILDROOT_TARGET_PATH/etc/init.d/
 cp alsa_conf/rt5651/alsa.conf $BUILDROOT_TARGET_PATH/usr/share/alsa/alsa.conf
 
 #bluetooth
