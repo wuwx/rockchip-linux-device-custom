@@ -6,8 +6,8 @@
 case "$1" in
 	start)
 
-		#Resize root filesystem to fit available disk space
-		resize2fs /dev/mmcblk1p5
+		#Resize userdata partition to fit available disk space
+		resize2fs /dev/mmcblk1p9
 
 		# Mount debugfs
 		mount -t debugfs none /sys/kernel/debug
