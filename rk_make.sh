@@ -49,7 +49,7 @@ if [ "$enable_adb"x = "yes"x ];then
 fi
 
 #dp firmware
-cp lib/firmware/rockchip/dptx.bin $BUILDROOT_TARGET_PATH/lib/firmware/rockchip/
+cp -r lib/firmware/ $BUILDROOT_TARGET_PATH/lib/
 
 #S12_launcher
 if [[ "$PLATFORM_WAYLAND"x == "no"x  ]];then
