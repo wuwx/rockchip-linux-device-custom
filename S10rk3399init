@@ -6,7 +6,8 @@
 case "$1" in
 	start)
 
-		#Resize userdata partition to fit available disk space
+		#Resize rootfs/userdata partition to fit available disk space
+		resize2fs /dev/mmcblk1p8
 		resize2fs /dev/mmcblk1p9
 
 		# Mount debugfs
