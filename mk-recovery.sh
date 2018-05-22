@@ -1,11 +1,64 @@
 #!/bin/bash
-
+#buildroot defconfig
+LUNCH=rockchip_rk3399_recovery
 PROJECT_DIR=$(pwd)
 KERNEL_IMAGE=$PROJECT_DIR/kernel/arch/arm64/boot/Image
-RAMDISK_IMAGE=$PROJECT_DIR/buildroot/output/images/rootfs.cpio.gz
 KERNEL_DTB=$PROJECT_DIR/kernel/resource.img
-RECOVERY_IMAGE=$PROJECT_DIR/rockimg/recovery.img
-echo "create recovery.img"
+MAKE_KERNEL_SCRIPT=$PROJECT_DIR/device/rockchip/rk3399/mk-kernel.sh
+usage()
+{
+    echo "USAGE: build [-ovj]"
+    echo "-o                    -Generate ota package"
+    echo "-v                    -Set build version name for output image folder"
+    echo "-j                    -Build jobs"
+    exit 1
+}
+
+# check pass argument
+while getopts "ovj:" arg
+do
+    case $arg in
+        o)
+            echo "will build ota package"
+            BUILD_OTA=true
+            ;;
+        v)
+            BUILD_VERSION=$OPTARG
+            ;;
+        j)
+            JOBS=$OPTARG
+            ;;
+        ?)
+            usage ;;
+    esac
+done
+
+TOP_DIR=$(pwd)
+source buildroot/build/envsetup.sh $LUNCH
+
+BUILD_CONFIG=`get_defconfig_name`
+echo "$BUILD_CONFIG"
+
+RAMDISK_IMAGE=buildroot/output/$BUILD_CONFIG/images/rootfs.cpio.gz
+RECOVERY_IMAGE=buildroot/output/$BUILD_CONFIG/images/recovery.img
+# build kernel
+cd kernel && $MAKE_KERNEL_SCRIPT && cd -
+if [ $? -eq 0 ]; then
+    echo "build kernel done"
+else
+    exit 1
+fi
+
+# build recovery
+echo "====Start build recovery===="
+make
+if [ $? -eq 0 ]; then
+    echo "====Build recovery ok!===="
+else
+    echo "====Build recovery failed!===="
+    exit 1
+fi
+
 echo -n "pack recovery image..."
 $PROJECT_DIR/kernel/scripts/mkbootimg --kernel $KERNEL_IMAGE --ramdisk $RAMDISK_IMAGE --second $KERNEL_DTB -o $RECOVERY_IMAGE
 echo "done."
