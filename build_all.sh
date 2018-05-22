@@ -5,7 +5,7 @@ BUILDROOT_PATH=$(pwd)/buildroot/
 PRODUCT_PATH=$(pwd)/device/rockchip/rk3399
 
 
-cd uboot && ./make.sh evb-rk3399 && cd -
+cd u-boot && ./make.sh evb-rk3399 && cd -
 ./mk-kernel.sh
 ./mk-rootfs.sh
 ./mk-recovery.sh
