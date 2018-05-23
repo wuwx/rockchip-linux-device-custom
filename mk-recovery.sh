@@ -3,7 +3,6 @@
 LUNCH=rockchip_rk3399_recovery
 PROJECT_DIR=$(pwd)
 KERNEL_IMAGE=$PROJECT_DIR/kernel/arch/arm64/boot/Image
-KERNEL_DTB=$PROJECT_DIR/kernel/resource.img
 MAKE_KERNEL_SCRIPT=$PROJECT_DIR/device/rockchip/rk3399/mk-kernel.sh
 usage()
 {
@@ -42,11 +41,17 @@ echo "$BUILD_CONFIG"
 RAMDISK_IMAGE=buildroot/output/$BUILD_CONFIG/images/rootfs.cpio.gz
 RECOVERY_IMAGE=buildroot/output/$BUILD_CONFIG/images/recovery.img
 # build kernel
-cd kernel && $MAKE_KERNEL_SCRIPT && cd -
-if [ $? -eq 0 ]; then
-    echo "build kernel done"
+if [ -f $KERNEL_IMAGE ]
+then
+	echo "found kernel image"
 else
-    exit 1
+	echo "kernel image doesn't exist, now build kernel image"
+	$MAKE_KERNEL_SCRIPT
+	if [ $? -eq 0 ]; then
+		echo "build kernel done"
+	else
+		exit 1
+	fi
 fi
 
 # build recovery
