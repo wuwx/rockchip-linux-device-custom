@@ -36,7 +36,7 @@ fi
 if [ -f $MISC_IMG_PATH ]
 then
 	echo -n "create misc.img..."
-	cp $MISC_IMG_PATH $IMAGE_OUT_PATH/
+	cp $MISC_IMG_PATH $IMAGE_OUT_PATH/misc.img
 	echo "done."
 else
 	echo -e "\e[31m error: $MISC_IMG_PATH not found! \e[0m"
