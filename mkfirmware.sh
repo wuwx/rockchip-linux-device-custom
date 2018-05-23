@@ -1,5 +1,5 @@
 TOOL_PATH=$(pwd)/build
-IMAGE_OUT_PATH=$(pwd)/rockimg
+IMAGE_OUT_PATH=$(pwd)/rockdev
 KERNEL_PATH=$(pwd)/kernel
 UBOOT_PATH=$(pwd)/u-boot
 ROOTFS_PATH=$(pwd)/rootfs
@@ -10,9 +10,17 @@ USER_DATA_IMG_PATH=$DEVICE_IMG_PATH/userdata.img
 MISC_IMG_PATH=$DEVICE_IMG_PATH/wipe_all-misc.img
 ROOTFS_IMG_PATH=$(pwd)/buildroot/output/rockchip_rk3399/images/rootfs.ext4
 RECOVERY_PATH=$(pwd)/buildroot/output/rockchip_rk3399_recovery/images/recovery.img
+ROOTFS_TYPE=
 mkdir -p $IMAGE_OUT_PATH
+if [ ! -n "$1" ]
+then
+echo "build buildroot type rootfs as default"
+ROOTFS_TYPE=buildroot
+else
+ROOTFS_TYPE="$1"
+fi
 
-if [ $1 = debian ]
+if [ $ROOTFS_TYPE = debian ]
 then
 	echo -n "create rootfs.img..."
 	cp $ROOTFS_PATH/linaro-rootfs.img $IMAGE_OUT_PATH/rootfs.img
@@ -114,4 +122,4 @@ else
 	exit 0
 fi
 
-echo -e "\e[36m Image: image in rockimg is ready \e[0m"
+echo -e "\e[36m Image: image in rockdev is ready \e[0m"
