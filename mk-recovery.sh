@@ -3,6 +3,7 @@
 LUNCH=rockchip_rk3399_recovery
 PROJECT_DIR=$(pwd)
 KERNEL_IMAGE=$PROJECT_DIR/kernel/arch/arm64/boot/Image
+KERNEL_DTB=$PROJECT_DIR/kernel/resource.img
 MAKE_KERNEL_SCRIPT=$PROJECT_DIR/device/rockchip/rk3399/mk-kernel.sh
 usage()
 {
