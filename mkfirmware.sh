@@ -1,27 +1,85 @@
 TOOL_PATH=$(pwd)/build
-IMAGE_OUT_PATH=$(pwd)/rockimg
+IMAGE_OUT_PATH=$(pwd)/rockdev
 KERNEL_PATH=$(pwd)/kernel
 UBOOT_PATH=$(pwd)/u-boot
 ROOTFS_PATH=$(pwd)/rootfs
-
+DEVICE_IMG_PATH=$(pwd)/device/rockchip/rk3288/rockdev
+PARAMETER_PATH=$DEVICE_IMG_PATH/parameter.txt
+OEM_IMG_PATH=$DEVICE_IMG_PATH/oem.img
+USER_DATA_IMG_PATH=$DEVICE_IMG_PATH/userdata.img
+MISC_IMG_PATH=$DEVICE_IMG_PATH/wipe_all-misc.img
+ROOTFS_IMG_PATH=$(pwd)/buildroot/output/rockchip_rk3288/images/rootfs.ext4
+RECOVERY_PATH=$(pwd)/buildroot/output/rockchip_rk3288_recovery/images/recovery.img
+ROOTFS_TYPE=
 mkdir -p $IMAGE_OUT_PATH
-if [ $1 = buildroot ]
+if [ ! -n "$1" ]
 then
-    #cd buildroot && make && cd -
-    rm -rf $IMAGE_OUT_PATH
-    mkdir -p $IMAGE_OUT_PATH
-    echo "Package rootfs.img now"
-    source $(pwd)/device/rockchip/rk3288/mkrootfs.sh
-    cp $(pwd)/buildroot/output/images/rootfs.ext4 $IMAGE_OUT_PATH/rootfs.img
-elif [ $1 = debian ]
-then
-    echo "Package rootfs.img now"
-    cp $ROOTFS_PATH/linaro-rootfs.img $IMAGE_OUT_PATH/rootfs.img
+echo "build buildroot type rootfs as default"
+ROOTFS_TYPE=buildroot
 else
-    echo -e "\e[31m error: please use the ./mkfirmware.sh debian or ./mkfirmware.sh buildroot \e[0m"
+ROOTFS_TYPE="$1"
 fi
 
-cp $(pwd)/device/rockchip/rk3288/rockimg/parameter.txt $IMAGE_OUT_PATH/
+if [ $ROOTFS_TYPE = debian ]
+then
+	echo -n "create rootfs.img..."
+	cp $ROOTFS_PATH/linaro-rootfs.img $IMAGE_OUT_PATH/rootfs.img
+	echo "done."
+else
+	echo -n "create rootfs.img..."
+	cp $ROOTFS_IMG_PATH $IMAGE_OUT_PATH/rootfs.img
+	echo "done"
+fi
+
+if [ -f $RECOVERY_PATH ]
+then
+	echo -n "create recovery.img..."
+	cp $RECOVERY_PATH $IMAGE_OUT_PATH/
+	echo "done."
+else
+	echo -e "\e[31m error: $RECOVERY_PATH not found! \e[0m"
+	exit 0
+fi
+
+if [ -f $MISC_IMG_PATH ]
+then
+	echo -n "create misc.img..."
+	cp $MISC_IMG_PATH $IMAGE_OUT_PATH/misc.img
+	echo "done."
+else
+	echo -e "\e[31m error: $MISC_IMG_PATH not found! \e[0m"
+	exit 0
+fi
+
+if [ -f $PARAMETER_PATH ]
+then
+	echo -n "create parameter.txt..."
+	cp $PARAMETER_PATH $IMAGE_OUT_PATH/
+	echo "done."
+else
+	echo -e "\e[31m error: $PARAMETER_PATH not found! \e[0m"
+	exit 0
+fi
+
+if [ -f $OEM_IMG_PATH ]
+then
+	echo -n "create oem.img..."
+	cp $OEM_IMG_PATH $IMAGE_OUT_PATH/
+	echo "done."
+else
+	echo -e "\e[31m error: $OEM_IMG_PATH not found! \e[0m"
+	exit 0
+fi
+
+if [ -f $USER_DATA_IMG_PATH ]
+then
+	echo -n "create userdata.img..."
+	cp $USER_DATA_IMG_PATH $IMAGE_OUT_PATH/
+	echo "done."
+else
+	echo -e "\e[31m error: $USER_DATA_IMG_PATH not found! \e[0m"
+	exit 0
+fi
 
 if [ -f $UBOOT_PATH/uboot.img ]
 then
@@ -54,23 +112,14 @@ else
 	exit 0
 fi
 
-if [ -f $KERNEL_PATH/resource.img ]
+if [ -f $KERNEL_PATH/boot.img ]
 then
-        echo -n "create resource.img..."
-        cp -a $KERNEL_PATH/resource.img $IMAGE_OUT_PATH/resource.img
-        echo "done."
+	echo -n "create boot.img..."
+	cp -a $KERNEL_PATH/boot.img $IMAGE_OUT_PATH/boot.img
+	echo "done."
 else
-        echo -e "\e[31m error: $KERNEL_PATH/resource.img not found! \e[0m"
+	echo -e "\e[31m error: $KERNEL_PATH/boot.img not found! \e[0m"
 	exit 0
 fi
 
-if [ -f $KERNEL_PATH/kernel.img ]
-then
-        echo -n "create kernel.img..."
-        cp -a $KERNEL_PATH/kernel.img $IMAGE_OUT_PATH/kernel.img
-        echo "done."
-else
-        echo -e "\e[31m error: $KERNEL_PATH/kernel.img not found! \e[0m"
-	exit 0
-fi
-echo -e "\e[36m Image: image in rockimg is ready \e[0m"
+echo -e "\e[36m Image: image in rockdev is ready \e[0m"
