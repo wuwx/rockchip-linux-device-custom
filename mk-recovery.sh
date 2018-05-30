@@ -2,7 +2,7 @@
 #buildroot defconfig
 LUNCH=rockchip_rk3288_recovery
 PROJECT_DIR=$(pwd)
-KERNEL_IMAGE=$PROJECT_DIR/kernel/arch/arm/boot/Image
+KERNEL_IMAGE=$PROJECT_DIR/kernel/arch/arm/boot/zImage
 KERNEL_DTB=$PROJECT_DIR/kernel/resource.img
 MAKE_KERNEL_SCRIPT=$PROJECT_DIR/device/rockchip/rk3288/mk-kernel.sh
 usage()
