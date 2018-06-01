@@ -32,6 +32,7 @@ then
 	sudo $UPGRADETOOL di -oem $OEM
 	sudo $UPGRADETOOL di -userdata $USERDATA
 	sudo $UPGRADETOOL di -rootfs $ROOTFS
+	sudo $UPGRADETOOL rd
 fi
 
 if [ $FLASH_TYPE = loader ]
