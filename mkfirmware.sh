@@ -4,7 +4,8 @@ KERNEL_PATH=$(pwd)/kernel
 UBOOT_PATH=$(pwd)/u-boot
 ROOTFS_PATH=$(pwd)/rootfs
 DEVICE_IMG_PATH=$(pwd)/device/rockchip/rk3399/rockdev
-PARAMETER_PATH=$DEVICE_IMG_PATH/parameter.txt
+PARAMETER_DEBIAN_PATH=$DEVICE_IMG_PATH/parameter-debian.txt
+PARAMETER_BUILDROOT_PATH=$DEVICE_IMG_PATH/parameter-buildroot.txt
 OEM_IMG_PATH=$DEVICE_IMG_PATH/oem.img
 USER_DATA_IMG_PATH=$DEVICE_IMG_PATH/userdata.img
 MISC_IMG_PATH=$DEVICE_IMG_PATH/wipe_all-misc.img
@@ -25,12 +26,14 @@ fi
 
 if [ $ROOTFS_TYPE = debian ]
 then
-	echo -n "create rootfs.img..."
+	echo -n "create rootfs.img and parameter.txt..."
 	ln -s -f $ROOTFS_PATH/linaro-rootfs.img $IMAGE_OUT_PATH/rootfs.img
+	ln -s -f $PARAMETER_DEBIAN_PATH $IMAGE_OUT_PATH/parameter.txt
 	echo "done."
 else
-	echo -n "create rootfs.img..."
+	echo -n "create rootfs.img and parameter.txt..."
 	ln -s -f $ROOTFS_IMG_PATH $IMAGE_OUT_PATH/rootfs.img
+	ln -s -f $PARAMETER_BUILDROOT_PATH $IMAGE_OUT_PATH/parameter.txt
 	echo "done"
 fi
 
@@ -51,16 +54,6 @@ then
 	echo "done."
 else
 	echo -e "\e[31m error: $MISC_IMG_PATH not found! \e[0m"
-	exit 0
-fi
-
-if [ -f $PARAMETER_PATH ]
-then
-	echo -n "create parameter.txt..."
-	ln -s -f $PARAMETER_PATH $IMAGE_OUT_PATH/
-	echo "done."
-else
-	echo -e "\e[31m error: $PARAMETER_PATH not found! \e[0m"
 	exit 0
 fi
 
