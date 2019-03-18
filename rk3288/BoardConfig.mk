@@ -3,11 +3,11 @@
 # Target arch
 export RK_ARCH=arm
 # Uboot defconfig
-export RK_UBOOT_DEFCONFIG=rk3288
+export RK_UBOOT_DEFCONFIG=ntablet-rk3288
 # Kernel defconfig
 export RK_KERNEL_DEFCONFIG=rockchip_linux_defconfig
 # Kernel dts
-export RK_KERNEL_DTS=rk3288-evb-rk808-linux
+export RK_KERNEL_DTS=rk3288-ntablet
 # boot image type
 export RK_BOOT_IMG=zboot.img
 # kernel image path
